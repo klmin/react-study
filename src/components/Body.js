@@ -1,17 +1,23 @@
 import "./Body.css";
+import { useState } from "react";
 
 const Body = () => {
 
-    const handleOnClick = (e) => {
-        console.log(e)
-        console.log(e.target)
-        alert(e.target.name);
+    const [count, setCount] = useState(0);
+
+    const onIncrease = () => {
+        setCount(count+1);
+    }
+
+    const onDecrease = () => {
+        setCount(count-1);
     }
 
     return(
-        <div className="body">
-            <button name="A버튼" onClick={handleOnClick}>A버튼</button>
-            <button name="B버튼" onClick={handleOnClick}>B버튼</button>
+        <div>
+            <h2>{count}</h2>
+            <button onClick={onIncrease}>+</button>
+            <button onClick={onDecrease}>-</button>
         </div>
     );          
       
