@@ -3,21 +3,40 @@ import { useState } from "react";
 
 const Body = () => {
 
-    const [count, setCount] = useState(0);
+    console.log("update");
 
-    const onIncrease = () => {
-        setCount(count+1);
-    }
+    const [state, setState] = useState({
+        name:"",
+        gender:"",
+        birth:"",
+        bio:""
+    });
 
-    const onDecrease = () => {
-        setCount(count-1);
-    }
+    const handleOnChange = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        });
+    };
 
     return(
         <div>
-            <h2>{count}</h2>
-            <button onClick={onIncrease}>+</button>
-            <button onClick={onDecrease}>-</button>
+            <div>
+                <input name="name" value={state.name} onChange={handleOnChange} placeholder="이름"/>
+            </div>
+            <div>
+                <select name="genrer" value={state.gender} onChange={handleOnChange}>
+                    <option key={""}>선택</option>
+                    <option key={"남성"}>남성</option>
+                    <option key={"여성"}>여성</option>
+                </select>
+            </div>
+            <div>
+                <input type="date" name="birth" value={state.birth} onChange={handleOnChange} />
+            </div>
+            <div>
+                <textarea name="bio" value={state.bio} onChange={handleOnChange} />
+            </div>
         </div>
     );          
       
