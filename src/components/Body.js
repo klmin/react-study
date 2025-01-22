@@ -1,8 +1,8 @@
 import "./Body.css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 
-const Body = () => {
-
+const Body = ({children}) => {
+   
     const [text, setText] = useState("");
     const textRef = useRef();
 
@@ -21,6 +21,7 @@ const Body = () => {
 
     return (
         <div>
+            <div>{children}</div>
             <input ref={textRef} value={text} onChange={handleOnChange}/>
             <button onClick={handleOnClick}>작성 완료</button>
         </div>
