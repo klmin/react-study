@@ -1,41 +1,33 @@
 import "./Body.css";
 import { useState } from "react";
 
+const Viewer = ({number}) => {
+    return (
+        <div>
+            {number % 2 === 0 ? <h3>짝수</h3> : <h3>홀수</h3>}
+        </div>
+    );
+}
+
+
 const Body = () => {
 
-    console.log("update");
+    const [number, setNumber] = useState(0);
 
-    const [state, setState] = useState({
-        name:"",
-        gender:"",
-        birth:"",
-        bio:""
-    });
-
-    const handleOnChange = (e) => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        });
-    };
+    const onIncrease = () => {
+        setNumber(n => n+1);
+    }
+    const onDecrease = () => {
+        setNumber(n => n-1)
+    }
 
     return(
         <div>
+            <h2>{number}</h2>
+            <Viewer number={number} />
             <div>
-                <input name="name" value={state.name} onChange={handleOnChange} placeholder="이름"/>
-            </div>
-            <div>
-                <select name="genrer" value={state.gender} onChange={handleOnChange}>
-                    <option key={""}>선택</option>
-                    <option key={"남성"}>남성</option>
-                    <option key={"여성"}>여성</option>
-                </select>
-            </div>
-            <div>
-                <input type="date" name="birth" value={state.birth} onChange={handleOnChange} />
-            </div>
-            <div>
-                <textarea name="bio" value={state.bio} onChange={handleOnChange} />
+                <button onClick={onDecrease}>-</button>
+                <button onClick={onIncrease}>+</button>
             </div>
         </div>
     );          
