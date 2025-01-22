@@ -1,37 +1,37 @@
 import "./Body.css";
-import { useState } from "react";
-
-const Viewer = ({number}) => {
-    return (
-        <div>
-            {number % 2 === 0 ? <h3>짝수</h3> : <h3>홀수</h3>}
-        </div>
-    );
-}
-
+import { useRef, useState, useEffect } from "react";
 
 const Body = () => {
 
-    const [number, setNumber] = useState(0);
+    const [text, setText] = useState("");
+    const [text1, setText1] = useState("");
+    const textRef = useRef();
 
-    const onIncrease = () => {
-        setNumber(n => n+1);
+    const handleOnChange = (e) => {
+        console.log(`text change value : ${e.target.value}`)
+        setText(e.target.value);
     }
-    const onDecrease = () => {
-        setNumber(n => n-1)
+    const handleOnChange1 = (e) => {
+        console.log(`text1 change value : ${e.target.value}`)
+        setText1(e.target.value);
     }
 
-    return(
+    const handleOnClick = () => {
+        alert(text);
+        textRef.current.value = "";
+    }   
+
+    useEffect(() => {
+        console.log(`update text : ${text}`);
+    }, [text]);
+
+    return (
         <div>
-            <h2>{number}</h2>
-            <Viewer number={number} />
-            <div>
-                <button onClick={onDecrease}>-</button>
-                <button onClick={onIncrease}>+</button>
-            </div>
+            <input ref={textRef} value={text} onChange={handleOnChange}/>
+            <button onClick={handleOnClick}>작성 완료</button>
+            <input value={text1} onChange={handleOnChange1}/>
         </div>
-    );          
-      
-};  
+    );
+}
 
 export default Body;
